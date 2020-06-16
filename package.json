@@ -1,15 +1,29 @@
 {
   "name": "note-taker",
   "version": "1.0.0",
-  "description": "",
+  "description": "App that lets you take notes and save them",
   "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "express": "^4.16.4",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "os": "^0.1.1",
+    "path": "^0.12.7",
+    "util": "^0.12.3",
     "uuid": "^8.1.0"
-  }
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/schoess/Note-Taker.git"
+  },
+  "author": "Nick Schoess",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/schoess/Note-Taker/issues"
+  },
+  "homepage": "https://github.com/schoess/Note-Taker#readme"
 }
