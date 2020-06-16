@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const fs = require("fs");
 const util = require("util");
+const { v4: uuidv4 } = require("uuid");
 const { networkInterfaces } = require("os");
 
 // Express app setup
@@ -40,14 +41,28 @@ app.post("/api/notes", async (req, res) => {
     try {
         let dataBase = await readFileAsync(path.join(__dirname, "/db/db.json"), "utf-8");
         let noteArr = JSON.parse(dataBase);
-        let createNote = JSON.parse(userEntry);
+        let createNote = JSON.parse(userInput);
         createNote.id = uuidv4();
         noteArr.push(createNote);
         await writeFileAsync(path.join(__dirname, "/db/db.json"), JSON.stringify(noteArr));
+        console.log("Note added");
         return res.json(userInput);
     } catch (err) {
         console.log(err);
     } 
+});
+
+app.delete("/api/notes/:id", (req, res) => {
+    let noteId = req.params.id;
+    let dataBase = fs.readFileSync(path.join(__dirname, "/db/db.json"), 'utf-8');
+    let noteArr = JSON.parse(dataBase);
+    for (note of noteArr) {
+        if (note.id == noteId) {
+            noteArr.pop(note);
+            fs.writeFileSync(path.join(__dirname, "/db/db.json"), JSON.stringify(noteArr));
+        }
+    }
+    res.json({message: "File Deleted"});
 });
 
 
